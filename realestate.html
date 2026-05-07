@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BACS Founder's OS | Luxury Real Estate Diagnosis</title>
+    <meta name="description" content="Run a clinical BACS structural diagnosis on your Luxury Real Estate conversion pipeline. Find your Booking Ceiling Score in 90 seconds.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../founders_os_v2.css">
+</head>
+<body data-auto-init="realestate">
+<div class="container">
+    <header>
+        <div class="badge">BACS STRUCTURAL DIAGNOSIS</div>
+        <h1>Founder's OS: Real Estate</h1>
+        <p class="subtitle">Diagnose the structural leak in your Real Estate pipeline. Get your Booking Ceiling Score in 90 seconds.</p>
+    </header>
+
+    <!-- PHASE 2: DATA COLLECTION (dynamic fields initialized by JS) -->
+    <div id="phase-data" class="phase">
+        <div class="matrix-card">
+            <div class="phase-header">
+                <button class="back-btn" onclick="goBack()">← Back</button>
+                <span class="selected-obj" id="selectedObjLabel"></span>
+            </div>
+            <div class="input-grid" id="dynamicFields"></div>
+            <button class="calculate-btn" onclick="runDiagnosis()">Run Structural Diagnosis</button>
+        </div>
+    </div>
+
+    <!-- PHASE 3: RESULTS -->
+    <div id="phase-results" class="phase">
+        <div class="matrix-card">
+            <div class="phase-header">
+                <button class="back-btn" onclick="goBackToData()">← Adjust Inputs</button>
+                <span class="selected-obj" id="resultsObjLabel"></span>
+            </div>
+            <div class="score-display">
+                <div class="score-card" id="card-m"><div class="score-value" id="mScore">0</div><div class="score-label">Motivation (M)</div><div class="status-badge" id="mStatus">—</div></div>
+                <div class="score-card" id="card-d"><div class="score-value" id="dScore">0</div><div class="score-label">Diagnosis (D)</div><div class="status-badge" id="dStatus">—</div></div>
+                <div class="score-card" id="card-f"><div class="score-value" id="fScore">0</div><div class="score-label">Feasibility (F)</div><div class="status-badge" id="fStatus">—</div></div>
+                <div class="score-card" id="card-p"><div class="score-value" id="pScore">0</div><div class="score-label">Proof (P)</div><div class="status-badge" id="pStatus">—</div></div>
+            </div>
+            <div class="formula-box">
+                <div class="formula-text">B = M(D + F) × P</div>
+                <div class="formula-result" id="formulaResult">0</div>
+                <div class="formula-label">Booking Ceiling Score (out of 1,000)</div>
+            </div>
+            <div class="analysis-box">
+                <h3>Primary Structural Leak</h3>
+                <p id="leakAnalysis">—</p>
+            </div>
+            <div class="analysis-box verdict-box">
+                <h3>BACS Formula Verdict</h3>
+                <p id="formulaVerdict">—</p>
+            </div>
+            <div class="cta-section">
+                <p class="cta-label">PROPRIETARY BACS OUTPUT</p>
+                <p class="cta-sub">The repair blueprint requires a Clinical Coordination Call.</p>
+                <a href="https://selar.co/bacsarchitect" class="cta-btn" target="_blank" id="buy-kit-btn">Get Engineering Kit ($49)</a>
+                <button class="print-btn" onclick="window.print()">Export Report (PDF)</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Olanrewaju Sodiq | BACS Specialist | Behavioral and Algorithmic Conversion Synthesis</p>
+        <a href="https://www.linkedin.com/in/bacsarchitect" target="_blank">linkedin.com/in/bacsarchitect</a>
+    </footer>
+</div>
+<script src="../founders_os_v2.js"></script>
+</body>
+</html>
