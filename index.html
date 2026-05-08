@@ -158,8 +158,7 @@
         <div id="niche-reminder">Please select a niche to initialize the diagnostic engine.</div>
     </section>
 
-    <section class="audit-section" id="audit-engine">
-        <h2 style="font-size: 0.8rem; opacity: 0.7;">2. Structural Integrity check</h2>
+    <section class="audit-section" id="audit-engine" style="margin-top: 1rem;">
         
         <div class="slider-row">
             <div>
@@ -204,8 +203,8 @@
             </div>
             <div class="diagnostics-display">
                 <div id="verdict-tag" class="verdict-tag">CRITICAL FRACTURE</div>
-                <div class="leak-label">PRIMARY STRUCTURAL LEAK:</div>
-                <div id="primary-leak">UNKNOWN</div>
+                <div class="leak-label" style="color: #ff6b6b; font-weight: 800;">PRIMARY STRUCTURAL LEAK:</div>
+                <div id="primary-leak" style="color: #ff6b6b; font-weight: 800; text-transform: uppercase; font-size: 0.9rem;">UNKNOWN</div>
                 <div id="formula-math" class="formula-math">BACS Formula Verdict: B = 1 * (1 + 1) * 1 = 10</div>
             </div>
         </div>
@@ -215,17 +214,25 @@
         <h3>DIAGNOSIS COMPLETE: SECURE ARCHIVE ACCESS</h3>
         
         <table class="benefit-table">
-            <tr>
-                <td>🛡️</td>
-                <td><span class="benefit-title">Unlimited Forensic Autopsies</span><span class="benefit-desc">Perform surgical diagnostics on any digital asset at will. Replaces $5,000+ in agency fees.</span></td>
+            <tr style="background: rgba(255, 255, 255, 0.02);">
+                <td style="color: var(--gold); font-weight: 800;">BENEFIT</td>
+                <td style="color: var(--gold); font-weight: 800;">BACS CLINICAL VALUE</td>
+                <td style="color: #ff6b6b; font-weight: 800; text-align: right;">MARKET COST</td>
             </tr>
             <tr>
-                <td>🎙️</td>
-                <td><span class="benefit-title">Forensic Briefings</span><span class="benefit-desc">Generate custom clinical podcasts for your brand or niche to identify capital leakage.</span></td>
+                <td>🛡️ <strong>Unlimited Autopsies</strong></td>
+                <td class="benefit-desc">Perform surgical diagnostics on any asset at will.</td>
+                <td style="text-align: right; opacity: 0.8;">$5,000+</td>
             </tr>
             <tr>
-                <td>💬</td>
-                <td><span class="benefit-title">Interactive Chat Analyst</span><span class="benefit-desc">Direct access to the gated BACS interactive environment for real-time triage.</span></td>
+                <td>🎙️ <strong>Forensic Briefings</strong></td>
+                <td class="benefit-desc">Custom clinical podcasts for your brand or niche.</td>
+                <td style="text-align: right; opacity: 0.8;">$1,500+</td>
+            </tr>
+            <tr>
+                <td>💬 <strong>Interactive Analyst</strong></td>
+                <td class="benefit-desc">Direct access to gated BACS interactive triage.</td>
+                <td style="text-align: right; opacity: 0.8;">$2,500+</td>
             </tr>
         </table>
 
@@ -284,18 +291,36 @@
         const raw = m * (d + f) * p;
         const normalized = Math.round((raw / 2000) * 1000);
         
-        document.getElementById('total-score').innerText = normalized;
+        document.getElementById('total-score').innerText = raw;
         document.getElementById('formula-math').innerText = "BACS Formula Verdict: B = " + m + " * (" + d + " + " + f + ") * " + p + " = " + raw;
 
         const tag = document.getElementById('verdict-tag');
-        if (normalized < 300) { tag.innerText = "CRITICAL FRACTURE"; tag.style.color = "#ff6b6b"; }
-        else if (normalized < 700) { tag.innerText = "SUB-OPTIMAL ARCHITECTURE"; tag.style.color = "#f5a623"; }
-        else { tag.innerText = "CLINICAL INTEGRITY"; tag.style.color = "#4ade80"; }
+        const leakLabel = document.querySelector('.leak-label');
+        const leakDisplay = document.getElementById('primary-leak');
+
+        if (normalized < 300) { 
+            tag.innerText = "CRITICAL FRACTURE"; 
+            tag.style.color = "#ff6b6b";
+            leakLabel.style.color = "#ff6b6b";
+            leakDisplay.style.color = "#ff6b6b";
+        }
+        else if (normalized < 700) { 
+            tag.innerText = "SUB-OPTIMAL ARCHITECTURE"; 
+            tag.style.color = "#f5a623";
+            leakLabel.style.color = "#f5a623";
+            leakDisplay.style.color = "#f5a623";
+        }
+        else { 
+            tag.innerText = "CLINICAL INTEGRITY"; 
+            tag.style.color = "#4ade80";
+            leakLabel.style.color = "#4ade80";
+            leakDisplay.style.color = "#4ade80";
+        }
 
         const scores = [{name: 'MOTIVATION (M)', val: m}, {name: 'DIAGNOSIS (D)', val: d}, {name: 'FEASIBILITY (F)', val: f}, {name: 'PROOF (P)', val: p}];
         const minVal = Math.min(...scores.map(s => s.val));
         const leak = scores.find(s => s.val === minVal).name;
-        document.getElementById('primary-leak').innerText = leak;
+        leakDisplay.innerText = leak;
 
         if (m > 1 || d > 1 || f > 1 || p > 1) {
             document.getElementById('community-section').style.display = 'block';
