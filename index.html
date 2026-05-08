@@ -3,70 +3,306 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BACS Founder's OS | Luxury Real Estate Diagnosis</title>
-    <meta name="description" content="Run a clinical BACS structural diagnosis on your Luxury Real Estate conversion pipeline.">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="founders_os_v2.css">
+    <title>BACS | Global Conversion Logic Terminal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0A0E27;
+            --gold: #F5A623;
+            --white: #F8F9FA;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--navy);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.4;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+        }
+
+        .terminal-container {
+            width: 100%;
+            max-width: 900px;
+            padding: 1.5rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        header { text-align: center; padding: 1rem 0; margin-bottom: 1rem; }
+        .status-bar {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #4ade80;
+            margin-bottom: 0.5rem;
+        }
+        h1 { font-family: 'Montserrat', sans-serif; font-size: 2.2rem; color: var(--gold); text-transform: uppercase; margin-bottom: 0.2rem; }
+        .architect { font-size: 0.8rem; opacity: 0.6; font-weight: 300; }
+
+        /* Step 1: Niche Selector */
+        .niche-section { margin-bottom: 2rem; text-align: center; }
+        .niche-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; margin-top: 1rem; }
+        .niche-btn {
+            background: var(--glass); border: 1px solid var(--border); padding: 1rem 0.5rem; border-radius: 6px;
+            cursor: pointer; transition: all 0.3s ease; font-size: 0.65rem; font-weight: 600; color: var(--white); text-transform: uppercase;
+        }
+        .niche-btn.active { border-color: var(--gold); background: rgba(245, 166, 35, 0.2); box-shadow: 0 0 15px rgba(245, 166, 35, 0.3); }
+        .niche-btn i { display: block; font-size: 1.2rem; margin-bottom: 0.3rem; }
+
+        /* Step 2: The Audit */
+        .audit-section {
+            background: var(--glass); border: 1px solid var(--border); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem;
+            opacity: 0.3; pointer-events: none; transition: 0.5s;
+        }
+        .audit-section.active { opacity: 1; pointer-events: auto; }
+
+        .slider-row { display: grid; grid-template-columns: 1fr 140px; gap: 1rem; margin-bottom: 1.5rem; align-items: center; }
+        .slider-label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.2rem; }
+        .slider-desc { font-size: 0.7rem; opacity: 0.5; display: block; margin-bottom: 0.5rem; }
+        .slider-controls { display: flex; align-items: center; gap: 8px; justify-content: flex-end; }
+        .slider-value { width: 40px; text-align: right; font-family: 'Montserrat', sans-serif; color: var(--gold); font-weight: 800; }
+
+        input[type="range"] { width: 100%; height: 6px; background: var(--border); border-radius: 5px; appearance: none; outline: none; }
+        input[type="range"]::-webkit-slider-thumb {
+            appearance: none; width: 18px; height: 18px; background: var(--gold); border-radius: 50%; cursor: pointer; border: 2px solid var(--navy);
+        }
+
+        /* Score Display */
+        .results-wrapper {
+            background: rgba(0,0,0,0.3); border-radius: 8px; border: 1px solid var(--border); padding: 1.5rem;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: center;
+        }
+        #total-score { font-family: 'Montserrat', sans-serif; font-size: 4rem; line-height: 1; color: var(--gold); }
+        .score-info { font-size: 0.65rem; font-weight: 700; color: var(--gold); margin-top: 10px; opacity: 0.8; }
+        
+        .diagnostics-display { text-align: right; border-left: 1px solid var(--border); padding-left: 1rem; }
+        .verdict-tag { font-weight: 800; font-size: 0.8rem; text-transform: uppercase; color: #ff6b6b; margin-bottom: 0.5rem; }
+        .leak-label { font-size: 0.7rem; color: var(--white); opacity: 0.7; }
+        #primary-leak { color: var(--gold); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; }
+        .formula-math { font-family: 'Montserrat', sans-serif; font-size: 0.65rem; color: var(--gold); margin-top: 0.8rem; opacity: 0.8; }
+
+        /* Step 3: Community (Benefit Table) */
+        .community-section {
+            display: none; background: rgba(245, 166, 35, 0.05); border: 1px solid var(--gold); padding: 2rem; border-radius: 12px; margin-top: 1.5rem;
+        }
+        .community-section h3 { font-family: 'Montserrat', sans-serif; font-size: 1rem; margin-bottom: 1.5rem; color: var(--gold); text-align: center; }
+
+        .benefit-table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; font-size: 0.8rem; }
+        .benefit-table td { padding: 1rem; border-bottom: 1px solid var(--border); vertical-align: middle; }
+        .benefit-table td:first-child { width: 40px; font-size: 1.2rem; }
+        .benefit-title { font-weight: 700; color: var(--gold); margin-bottom: 0.2rem; display: block; }
+        .benefit-desc { opacity: 0.7; font-size: 0.75rem; line-height: 1.3; }
+
+        .btn {
+            display: block; width: 100%; max-width: 400px; margin: 0 auto; padding: 1.2rem;
+            border-radius: 4px; text-decoration: none; font-weight: 700; text-transform: uppercase;
+            font-size: 0.85rem; letter-spacing: 1px; transition: 0.3s; text-align: center;
+        }
+        .btn-gold { background: var(--gold); color: var(--navy); }
+        .btn-gold:hover { background: white; transform: scale(1.02); }
+
+        /* Step 4: Repair Protocols (High Ticket) */
+        .services-section {
+            display: none; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center;
+        }
+        .service-card {
+            background: var(--glass); border: 1px solid var(--border); padding: 2rem; border-radius: 8px; margin-bottom: 2rem; text-align: left; transition: 0.3s;
+        }
+        .service-card:hover { border-color: var(--gold); }
+        .service-card h4 { font-family: 'Montserrat', sans-serif; color: var(--gold); font-size: 1rem; margin-bottom: 0.5rem; }
+        .service-card p { font-size: 0.85rem; opacity: 0.7; margin-bottom: 1.5rem; }
+        .btn-outline { border: 1px solid var(--border); color: var(--white); background: transparent; }
+
+        #niche-reminder { color: #ff6b6b; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-top: 0.5rem; display: none; }
+
+        @media (max-width: 700px) {
+            .results-wrapper { grid-template-columns: 1fr; text-align: center; }
+            .diagnostics-display { text-align: center; border-left: none; border-top: 1px solid var(--border); padding-left: 0; padding-top: 1rem; }
+            .niche-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    </style>
 </head>
-<body data-auto-init="realestate">
-<div class="container">
+<body>
+
+<div class="terminal-container">
     <header>
-        <div class="badge">BACS STRUCTURAL DIAGNOSIS</div>
-        <h1>Founder's OS: Real Estate</h1>
-        <p class="subtitle">Diagnose the structural leak in your Real Estate pipeline.</p>
+        <div class="status-bar">Terminal Status: High-Authority Active</div>
+        <h1>BACS Global Terminal</h1>
+        <div class="architect">Engineered by Olanrewaju Sodiq | Systems Architect</div>
     </header>
 
-    <!-- PHASE 2: DATA COLLECTION (dynamic fields initialized by JS) -->
-    <div id="phase-data" class="phase">
-        <div class="matrix-card">
-            <div class="phase-header">
-                <button class="back-btn" onclick="goBack()">← Back</button>
-                <span class="selected-obj" id="selectedObjLabel"></span>
-            </div>
-            <div class="input-grid" id="dynamicFields"></div>
-            <button class="calculate-btn" onclick="runDiagnosis()">Run Structural Diagnosis</button>
+    <section class="niche-section">
+        <h2 style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.7;">1. Select Conversion objective</h2>
+        <div class="niche-grid">
+            <div class="niche-btn" onclick="activateAudit(this, 'Real Estate')"><i>🏗️</i>Real Estate</div>
+            <div class="niche-btn" onclick="activateAudit(this, 'SaaS')"><i>⚙️</i>SaaS / Tech</div>
+            <div class="niche-btn" onclick="activateAudit(this, 'E-Commerce')"><i>🛒</i>E-Commerce</div>
+            <div class="niche-btn" onclick="activateAudit(this, 'Agency')"><i>📡</i>Agency</div>
+            <div class="niche-btn" onclick="activateAudit(this, 'Professional')"><i>📋</i>Professional</div>
         </div>
-    </div>
+        <div id="niche-reminder">Please select a niche to initialize the diagnostic engine.</div>
+    </section>
 
-    <!-- PHASE 3: RESULTS -->
-    <div id="phase-results" class="phase">
-        <div class="matrix-card">
-            <div class="phase-header">
-                <button class="back-btn" onclick="goBackToData()">← Adjust Inputs</button>
-                <span class="selected-obj" id="resultsObjLabel"></span>
+    <section class="audit-section" id="audit-engine">
+        <h2 style="font-size: 0.8rem; opacity: 0.7;">2. Structural Integrity check</h2>
+        
+        <div class="slider-row">
+            <div>
+                <label class="slider-label">Motivation (M)</label>
+                <span class="slider-desc">Market intent, urgency, and specific desire for the outcome.</span>
+                <input type="range" id="m-score" min="1" max="10" value="1" oninput="calculateBACS()">
             </div>
+            <div class="slider-controls"><span id="m-val" class="slider-value">1</span><span style="font-size: 0.7rem; opacity: 0.5;">/10</span></div>
+        </div>
+
+        <div class="slider-row">
+            <div>
+                <label class="slider-label">Diagnosis (D)</label>
+                <span class="slider-desc">Site's clarity in identifying and validating the visitor's specific problem.</span>
+                <input type="range" id="d-score" min="1" max="10" value="1" oninput="calculateBACS()">
+            </div>
+            <div class="slider-controls"><span id="d-val" class="slider-value">1</span><span style="font-size: 0.7rem; opacity: 0.5;">/10</span></div>
+        </div>
+
+        <div class="slider-row">
+            <div>
+                <label class="slider-label">Feasibility (F)</label>
+                <span class="slider-desc">Clarity and perceived ease of the 3-step path to the solution.</span>
+                <input type="range" id="f-score" min="1" max="10" value="1" oninput="calculateBACS()">
+            </div>
+            <div class="slider-controls"><span id="f-val" class="slider-value">1</span><span style="font-size: 0.7rem; opacity: 0.5;">/10</span></div>
+        </div>
+
+        <div class="slider-row" style="margin-bottom: 2rem;">
+            <div>
+                <label class="slider-label">Proof (P)</label>
+                <span class="slider-desc">Verifiable authority signals and social validation (P-Signals).</span>
+                <input type="range" id="p-score" min="1" max="10" value="1" oninput="calculateBACS()">
+            </div>
+            <div class="slider-controls"><span id="p-val" class="slider-value">1</span><span style="font-size: 0.7rem; opacity: 0.5;">/10</span></div>
+        </div>
+
+        <div class="results-wrapper">
             <div class="score-display">
-                <div class="score-card" id="card-m"><div class="score-value" id="mScore">0</div><div class="score-label">Motivation (M)</div><div class="status-badge" id="mStatus">—</div></div>
-                <div class="score-card" id="card-d"><div class="score-value" id="dScore">0</div><div class="score-label">Diagnosis (D)</div><div class="status-badge" id="dStatus">—</div></div>
-                <div class="score-card" id="card-f"><div class="score-value" id="fScore">0</div><div class="score-label">Feasibility (F)</div><div class="status-badge" id="fStatus">—</div></div>
-                <div class="score-card" id="card-p"><div class="score-value" id="pScore">0</div><div class="score-label">Proof (P)</div><div class="status-badge" id="pStatus">—</div></div>
+                <div id="total-score">10</div>
+                <div class="score-info">WHY OUT OF 1000? <br> 1000 represents a clinically perfect conversion pipeline. Your score reflects your current structural efficiency.</div>
             </div>
-            <div class="formula-box">
-                <div class="formula-text">B = M(D + F) × P</div>
-                <div class="formula-result" id="formulaResult">0</div>
-                <div class="formula-label">Booking Ceiling Score (out of 1,000)</div>
-            </div>
-            <div class="analysis-box">
-                <h3>Primary Structural Leak</h3>
-                <p id="leakAnalysis">—</p>
-            </div>
-            <div class="analysis-box verdict-box">
-                <h3>BACS Formula Verdict</h3>
-                <p id="formulaVerdict">—</p>
-            </div>
-            <div class="cta-section">
-                <p class="cta-label">PROPRIETARY BACS OUTPUT</p>
-                <p class="cta-sub">The repair blueprint requires a Clinical Coordination Call.</p>
-                <button class="print-btn" onclick="window.print()">Export Report (PDF)</button>
+            <div class="diagnostics-display">
+                <div id="verdict-tag" class="verdict-tag">CRITICAL FRACTURE</div>
+                <div class="leak-label">PRIMARY STRUCTURAL LEAK:</div>
+                <div id="primary-leak">UNKNOWN</div>
+                <div id="formula-math" class="formula-math">BACS Formula Verdict: B = 1 * (1 + 1) * 1 = 10</div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <footer>
-        <p>Olanrewaju Sodiq | BACS Specialist | Behavioral and Algorithmic Conversion Synthesis</p>
-        <a href="https://www.linkedin.com/in/bacsarchitect" target="_blank">linkedin.com/in/bacsarchitect</a>
+    <section class="community-section" id="community-section">
+        <h3>DIAGNOSIS COMPLETE: SECURE ARCHIVE ACCESS</h3>
+        
+        <table class="benefit-table">
+            <tr>
+                <td>🛡️</td>
+                <td><span class="benefit-title">Unlimited Forensic Autopsies</span><span class="benefit-desc">Perform surgical diagnostics on any digital asset at will. Replaces $5,000+ in agency fees.</span></td>
+            </tr>
+            <tr>
+                <td>🎙️</td>
+                <td><span class="benefit-title">Forensic Briefings</span><span class="benefit-desc">Generate custom clinical podcasts for your brand or niche to identify capital leakage.</span></td>
+            </tr>
+            <tr>
+                <td>💬</td>
+                <td><span class="benefit-title">Interactive Chat Analyst</span><span class="benefit-desc">Direct access to the gated BACS interactive environment for real-time triage.</span></td>
+            </tr>
+        </table>
+
+        <p style="font-size: 0.75rem; font-weight: 700; color: var(--gold); text-transform: uppercase; margin-bottom: 1.5rem; text-align: center;">
+            Upon payment, you will receive an immediate invitation to the gated NotebookLM diagnostic environment.
+        </p>
+
+        <a href="https://yoursubstacklink.com" class="btn btn-gold">Join Engineering Circle ($49/mo)</a>
+    </section>
+
+    <section class="services-section" id="services-section">
+        <h2 style="font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 3px; color: var(--gold); margin-bottom: 2rem;">REPAIR PROTOCOLS (THE FIX)</h2>
+        
+        <div class="service-card">
+            <h4>Surgical Repair Blueprint</h4>
+            <p>Positioned for full-scale conversion engineering. We don't just find the leaks; we build the repair systems. Rebuild your digital infrastructure from the ground up for maximum capital yield.</p>
+            <a href="https://yourpaymentlink.com/repair" class="btn btn-outline" style="max-width: 300px; margin: 0;">Initiate Repair ($2,500)</a>
+        </div>
+
+        <div class="service-card">
+            <h4>Clinical Coordination Call</h4>
+            <p>Positioned as a "Tactical Strike." Ideal for isolating and resolving one specific structural fracture in a high-intensity 45-minute session with a Systems Architect.</p>
+            <a href="https://yourpaymentlink.com/call" class="btn btn-outline" style="max-width: 300px; margin: 0;">Book Coordination Call ($497)</a>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 2rem; opacity: 0.3; font-size: 0.7rem; border-top: 1px solid var(--border); margin-top: 2rem;">
+        BACS | Engineering Logic into Global Digital Infrastructure<br>
+        &copy; 2026 Olanrewaju Sodiq. All Rights Reserved.
     </footer>
 </div>
-<script src="founders_os_v2.js"></script>
+
+<script>
+    let nicheSelected = false;
+
+    function activateAudit(btn, niche) {
+        nicheSelected = true;
+        document.getElementById('niche-reminder').style.display = 'none';
+        document.querySelectorAll('.niche-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('audit-engine').classList.add('active');
+    }
+
+    function calculateBACS() {
+        if (!nicheSelected) { document.getElementById('niche-reminder').style.display = 'block'; return; }
+        const m = parseInt(document.getElementById('m-score').value);
+        const d = parseInt(document.getElementById('d-score').value);
+        const f = parseInt(document.getElementById('f-score').value);
+        const p = parseInt(document.getElementById('p-score').value);
+
+        document.getElementById('m-val').innerText = m;
+        document.getElementById('d-val').innerText = d;
+        document.getElementById('f-val').innerText = f;
+        document.getElementById('p-val').innerText = p;
+
+        const raw = m * (d + f) * p;
+        const normalized = Math.round((raw / 2000) * 1000);
+        
+        document.getElementById('total-score').innerText = normalized;
+        document.getElementById('formula-math').innerText = "BACS Formula Verdict: B = " + m + " * (" + d + " + " + f + ") * " + p + " = " + raw;
+
+        const tag = document.getElementById('verdict-tag');
+        if (normalized < 300) { tag.innerText = "CRITICAL FRACTURE"; tag.style.color = "#ff6b6b"; }
+        else if (normalized < 700) { tag.innerText = "SUB-OPTIMAL ARCHITECTURE"; tag.style.color = "#f5a623"; }
+        else { tag.innerText = "CLINICAL INTEGRITY"; tag.style.color = "#4ade80"; }
+
+        const scores = [{name: 'MOTIVATION (M)', val: m}, {name: 'DIAGNOSIS (D)', val: d}, {name: 'FEASIBILITY (F)', val: f}, {name: 'PROOF (P)', val: p}];
+        const minVal = Math.min(...scores.map(s => s.val));
+        const leak = scores.find(s => s.val === minVal).name;
+        document.getElementById('primary-leak').innerText = leak;
+
+        if (m > 1 || d > 1 || f > 1 || p > 1) {
+            document.getElementById('community-section').style.display = 'block';
+            document.getElementById('services-section').style.display = 'block';
+        }
+    }
+</script>
+
 </body>
 </html>
